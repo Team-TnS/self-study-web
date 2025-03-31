@@ -4,7 +4,7 @@ export default function Layout({
   children: React.ReactNode
 }>) {
   return (
-    <div>
+    <div className="layout">
       <main>{children}</main>
     </div>
   )
