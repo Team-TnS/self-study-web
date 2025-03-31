@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { useMutation } from "@tanstack/react-query"
 import { postAuthenticate } from "@/api/member/postAuthenticate"
 import { postJoinAndLogin } from "@/api/member/postJoinAndLogin"
-import { showErrorMessage } from "@/utils/showErrorMessage"
 
 export default function Home() {
   const [state, setState] = useState({

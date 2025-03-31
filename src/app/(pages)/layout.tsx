@@ -1,16 +1,11 @@
-import Header from "@/layout/Header"
-import Footer from "@/layout/Footer"
+import React from "react"
+import ClientLayout from "@/app/(pages)/ClientLayout"
+import { PageHeaderProvider } from "@/layout/PageHeaderProvider"
 
-export default function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <Header />
-      <main>{children}</main>
-      <Footer />
-    </div>
+    <PageHeaderProvider>
+      <ClientLayout>{children}</ClientLayout>
+    </PageHeaderProvider>
   )
 }
