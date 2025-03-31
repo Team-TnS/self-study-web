@@ -2,6 +2,7 @@
 "use client"
 
 import Header from "@/layout/Header"
+import Footer from "@/layout/Footer"
 import { usePageHeader } from "@/layout/PageHeaderProvider"
 
 export default function ClientLayout({
@@ -12,9 +13,10 @@ export default function ClientLayout({
   const { title } = usePageHeader()
 
   return (
-    <div>
+    <div className="layout">
       <Header title={title} showBackButton />
       <main>{children}</main>
+      <Footer />
     </div>
   )
 }

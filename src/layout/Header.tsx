@@ -38,6 +38,7 @@ const Nav = styled.nav`
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
   position: relative;
+  height: 48px;
 `
 
 const HeaderWrapper = styled.div`
