@@ -1,0 +1,11 @@
+.wrapper {
+    color: #646464;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
