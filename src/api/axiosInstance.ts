@@ -4,7 +4,7 @@ const getOSVersion = () => {
   return typeof window !== "undefined" ? navigator.userAgent : "unknown"
 }
 
-const getAuthToken = () => {
+export const getAuthToken = () => {
   if (typeof document !== "undefined") {
     const cookies = document.cookie.split("; ").reduce(
       (acc, cookie) => {

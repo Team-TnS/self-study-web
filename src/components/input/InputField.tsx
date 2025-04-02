@@ -1,5 +1,9 @@
 import { ChangeEvent } from "react"
-import styles from "./InputField.module.css"
+import {
+  Counter,
+  InputWrapper,
+  StyledInput,
+} from "@/components/input/InputFieldStyle"
 
 interface InputFieldProps {
   value: string
@@ -17,21 +21,20 @@ export default function InputField({
   id = "textInput",
 }: InputFieldProps) {
   return (
-    <div className={styles.inputWrapper}>
-      <input
+    <InputWrapper>
+      <StyledInput
         type="text"
         id={id}
         value={value}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           onChange(e.target.value)
         }
-        className={styles.input}
         placeholder={placeholder}
         maxLength={maxLength}
       />
-      <span className={styles.counter}>
+      <Counter>
         {value.length}/{maxLength}
-      </span>
-    </div>
+      </Counter>
+    </InputWrapper>
   )
 }

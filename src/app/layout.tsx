@@ -1,7 +1,12 @@
+"use client"
+
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import Providers from "./providers"
+import { usePathname, useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { getAuthToken } from "@/api/axiosInstance"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,14 +18,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
-export const metadata: Metadata = {
-  title: "Self Study",
-  description: "Let's Study",
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const router = useRouter()
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const isLoginPage = pathname === "/login"
+    if (!getAuthToken() && !isLoginPage) {
+      router.replace("/login")
+    }
+  }, [pathname])
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

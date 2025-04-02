@@ -1,16 +1,26 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { useMutation } from "@tanstack/react-query"
 import { postAuthenticate } from "@/api/member/postAuthenticate"
 import { postJoinAndLogin } from "@/api/member/postJoinAndLogin"
+import { useRouter } from "next/navigation"
+import InputField from "@/components/input/InputField"
+import { getAuthToken } from "@/api/axiosInstance"
 
-export default function Home() {
+export default function Login() {
+  const router = useRouter()
   const [state, setState] = useState({
     phone: "",
     authenticationCode: "",
     isSend: false,
   })
+
+  useEffect(() => {
+    if (getAuthToken()) {
+      router.replace("/")
+    }
+  }, [])
 
   const { mutate: authenticationMutate } = useMutation({
     mutationFn: () => postAuthenticate(state.phone),
@@ -19,6 +29,7 @@ export default function Home() {
         ...prev,
         isSend: true,
       }))
+      alert("문자 전송 성공!")
     },
   })
 
@@ -31,31 +42,34 @@ export default function Home() {
     onSuccess: (res) => {
       if (res.authToken) {
         document.cookie = `token=${res.authToken}; path=/; max-age=86400`
+        router.replace("/")
       }
     },
   })
 
   return (
     <Container>
-      <PhoneInput
+      <InputField
         value={state.phone}
-        onChange={(e) =>
+        onChange={(value) =>
           setState((prev) => ({
             ...prev,
-            phone: e.target.value,
+            phone: value,
           }))
         }
-        placeholder="전화번호를 입력해주세요."
+        placeholder="전화번호를 입력해주세요.(-은 제외)"
+        maxLength={11}
       />
-      <AuthenticationNumberInput
+      <InputField
         value={state.authenticationCode}
-        onChange={(e) =>
+        onChange={(value) =>
           setState((prev) => ({
             ...prev,
-            authenticationCode: e.target.value,
+            authenticationCode: value,
           }))
         }
         placeholder="인증번호를 입력해주세요."
+        maxLength={4}
       />
       {state.isSend ? (
         <Button onClick={() => loginMutate()}>회원가입</Button>
@@ -69,49 +83,16 @@ export default function Home() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100dvh;
   gap: 26px;
-  padding-bottom: 80px;
-`
-
-const PhoneInput = styled.input`
-  margin-top: 258px;
-  padding: 15px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  outline: none;
-  align-items: center;
-  justify-content: center;
-  &:focus {
-    border-color: #0070f3;
-    box-shadow: 0 0 5px rgba(0, 112, 243, 0.3);
-  }
-`
-
-const AuthenticationNumberInput = styled.input`
-  padding: 15px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  outline: none;
-  align-items: center;
-  justify-content: center;
-  &:focus {
-    border-color: #0070f3;
-    box-shadow: 0 0 5px rgba(0, 112, 243, 0.3);
-  }
+  padding: 200px 25px;
 `
 
 const Button = styled.button`
-  position: fixed;
+  margin-top: 66px;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 20px 121px;
+  padding: 20px;
   font-size: 16px;
   color: white;
   font-weight: 700;
@@ -120,6 +101,5 @@ const Button = styled.button`
   border-radius: 8px;
   cursor: pointer;
   width: 100%;
-  max-width: 360px;
   transition: background-color 0.3s;
 `
