@@ -84,7 +84,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100dvh; // ← 이걸로 바꾸면 모바일에서 더 정확해짐!
+  min-height: 100dvh;
   gap: 26px;
   padding: 200px 25px;
 `
