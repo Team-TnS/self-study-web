@@ -25,14 +25,12 @@ export default function RootLayout({
   const pathname = usePathname()
 
   useEffect(() => {
-    const token = getAuthToken()
-
     const isLoginPage = pathname === "/login"
-
-    if (!token && !isLoginPage) {
+    if (!getAuthToken() && !isLoginPage) {
       router.replace("/login")
     }
   }, [pathname])
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
