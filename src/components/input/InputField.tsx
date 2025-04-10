@@ -11,6 +11,8 @@ interface InputFieldProps {
   placeholder?: string
   maxLength?: number
   id?: string
+  visible?: boolean
+  disabled?: boolean
 }
 
 export default function InputField({
@@ -19,9 +21,11 @@ export default function InputField({
   placeholder = "내용을 입력해주세요.",
   maxLength = 24,
   id = "textInput",
+  visible = true,
+  disabled = false,
 }: InputFieldProps) {
   return (
-    <InputWrapper>
+    <InputWrapper visible={visible}>
       <StyledInput
         type="text"
         id={id}
@@ -31,6 +35,8 @@ export default function InputField({
         }
         placeholder={placeholder}
         maxLength={maxLength}
+        disabled={disabled}
+        autoComplete="off"
       />
       <Counter>
         {value.length}/{maxLength}

@@ -1,10 +1,11 @@
 import styled from "styled-components"
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.div<{ visible?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
   height: 48px;
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
 `
 
 export const StyledInput = styled.input`
