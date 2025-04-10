@@ -1,8 +1,10 @@
 "use client"
 
-import styled from "styled-components"
 import { useRouter } from "next/navigation"
 import CardGrid, { CardDto } from "@/components/display/CardGrid"
+import SubHeader from "@/components/display/SubHeader"
+import React from "react"
+import { PageWrapper } from "@/components/display/PageWrapper"
 
 const bookcases: CardDto[] = [
   { name: "영어", progress: 14, count: 16 },
@@ -17,12 +19,11 @@ export default function Home() {
   const router = useRouter()
   return (
     <PageWrapper>
-      <Header>
-        <Title>내 책장</Title>
-        <AddButton onClick={() => router.push("/bookcase/register")}>
-          {PlusSvg}
-        </AddButton>
-      </Header>
+      <SubHeader
+        title="내 책장"
+        onClick={() => router.push("/bookcase/register")}
+        icon={PlusSvg}
+      />
       <CardGrid
         cardDtos={bookcases}
         handleOnClick={(bookcase, index) =>
@@ -33,46 +34,21 @@ export default function Home() {
   )
 }
 
-export const PageWrapper = styled.div`
-  padding: 100px 25px;
-  background: #fff;
-  min-height: 100vh;
-`
-
-export const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 61px;
-`
-
-export const Title = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
-`
-
-export const AddButton = styled.button`
-  font-size: 28px;
-  font-weight: bold;
-  background: none;
-  border: none;
-  cursor: pointer;
-`
-
-const PlusSvg = (
-  <svg
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M16 6.66663V25.3333M6.66669 16H25.3334"
-      stroke="#1E1E1E"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-  </svg>
-)
+const PlusSvg = // TODO : 나중에 공통으로 빼기
+  (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 6.66663V25.3333M6.66669 16H25.3334"
+        stroke="#1E1E1E"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
