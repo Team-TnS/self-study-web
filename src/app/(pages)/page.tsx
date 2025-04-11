@@ -1,48 +1,54 @@
 "use client"
 
-import styles from "./page.module.css"
-import BasicButton from "@/components/input/BasicButton"
-import BasicText from "@/components/display/BasicText"
 import { useRouter } from "next/navigation"
-import BookcasePage from "@/app/(pages)/bookcase/[Id]/page"
+import CardGrid, { CardDto } from "@/components/display/CardGrid"
+import SubHeader from "@/components/display/SubHeader"
+import React from "react"
+import { PageWrapper } from "@/components/display/PageWrapper"
+
+const bookcases: CardDto[] = [
+  { name: "영어", progress: 14, count: 16 },
+  { name: "국어", progress: 24, count: 30 },
+  { name: "정보처리기사", progress: 0, count: 2 },
+  { name: "한국사", progress: 14, count: 16 },
+  { name: "2024 모의고사", progress: 3, count: 6 },
+  { name: "토익 기출 정리", progress: 15, count: 17 },
+]
+
 export default function Home() {
   const router = useRouter()
-
-  const bookcases = [
-    { name: "수학", progress: 12, count: 25 },
-    { name: "토익 기출 정리", progress: 2, count: 4 },
-    { name: "2024 모의고사", progress: 6, count: 7 },
-  ]
   return (
-    <div className={styles.page}>
-      {!bookcases ? (
-        <>
-          <BasicText text={"나만의 책장을 만들어 공부해보세요."} />
-          <BasicButton
-            text={"책장 만들기"}
-            onPress={() => router.push("/bookcase/register")}
-          />
-        </>
-      ) : (
-        <div>
-          {bookcases.map((bookcase) => (
-            <div
-              key={bookcase.name}
-              className={styles.bookcaseItem}
-              onClick={() => router.push("/bookcase/1")}
-            >
-              <BasicText text={bookcase.name} />
-              <BasicText
-                text={`진행도: ${bookcase.progress}/${bookcase.count}`}
-              />
-            </div>
-          ))}
-          <BasicButton
-            text={"책장 만들기"}
-            onPress={() => router.push("/bookcase/register")}
-          />
-        </div>
-      )}
-    </div>
+    <PageWrapper>
+      <SubHeader
+        title="내 책장"
+        onClick={() => router.push("/bookcase/register")}
+        icon={PlusSvg}
+      />
+      <CardGrid
+        cardDtos={bookcases}
+        handleOnClick={(bookcase, index) =>
+          router.push(`/bookcase/${index + 1}`)
+        }
+      />
+    </PageWrapper>
   )
 }
+
+const PlusSvg = // TODO : 나중에 공통으로 빼기
+  (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 6.66663V25.3333M6.66669 16H25.3334"
+        stroke="#1E1E1E"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
