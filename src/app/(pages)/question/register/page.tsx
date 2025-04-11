@@ -3,7 +3,7 @@
 import styled from "styled-components"
 import { PageWrapper } from "@/components/display/PageWrapper"
 import ChoiceRow from "@/components/display/ChoiceRow"
-import useQuestionRegister from "@/app/(pages)/question/register/useQuestionRegister"
+import useQuestionRegister from "@/hooks/question/useQuestionRegister"
 import { DefaultLabel } from "@/components/display/LabelStyle"
 import { DefaultAddButton } from "@/components/display/AddButtonStyle"
 import React from "react"

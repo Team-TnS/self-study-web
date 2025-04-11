@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const getOSVersion = () => {
+  // TODO ...
   return typeof window !== "undefined" ? navigator.userAgent : "unknown"
 }
 
@@ -29,7 +30,7 @@ axiosInstance.interceptors.request.use(
     const token = getAuthToken()
     config.headers.os = "web"
     config.headers["app-version"] = "1"
-    config.headers["os-version"] = getOSVersion()
+    config.headers["os-version"] = 999 // TODO : 여기 수정 필요
     if (token) {
       config.headers["auth-token"] = `Bearer ${token}`
     }

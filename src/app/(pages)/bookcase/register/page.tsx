@@ -1,11 +1,15 @@
 "use client"
 
 import styles from "./page.module.css"
-import { useEffect } from "react"
 import { usePageHeader } from "@/layout/PageHeaderProvider"
-import TextForm from "@/components/input/TextForm"
+import InputField from "@/components/input/InputField"
+import BasicButton from "@/components/input/BasicButton"
+import useBookcaseRegister from "@/hooks/bookcase/useBookcaseRegister"
+import { useEffect } from "react"
+
 export default function BookcaseRegisterPage() {
   const { setTitle } = usePageHeader()
+  const { requestState, handleNameChange, handleSubmit } = useBookcaseRegister()
 
   useEffect(() => {
     setTitle("책장 만들기")
@@ -13,11 +17,8 @@ export default function BookcaseRegisterPage() {
 
   return (
     <div className={styles.page}>
-      <TextForm
-        maxLength={24}
-        placeholder={"책장 이름을 입력해주세요."}
-        buttonText={"책장 만들기"}
-      />
+      <InputField value={requestState.name} onChange={handleNameChange} />
+      <BasicButton text={"저장"} onPress={() => handleSubmit()} />
     </div>
   )
 }
