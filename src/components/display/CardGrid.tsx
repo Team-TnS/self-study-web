@@ -9,9 +9,10 @@ import {
 } from "@/components/display/CardGridStyle"
 
 export interface CardDto {
-  name: string
+  bookcaseName: string
   progress: number
   count: number
+  bookcaseId: number
 }
 
 interface CardGridProps {
@@ -31,7 +32,7 @@ export default function CardGrid({ cardDtos, handleOnClick }: CardGridProps) {
             style={{ background: gradient }}
             onClick={() => handleOnClick(cardDto, index)}
           >
-            <CardTitle>{cardDto.name}</CardTitle>
+            <CardTitle>{cardDto.bookcaseName}</CardTitle>
             <CardProgress>
               {cardDto.progress}/{cardDto.count}
             </CardProgress>
