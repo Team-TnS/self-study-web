@@ -33,6 +33,7 @@ export default function BookPage({
           <BasicButton
             text={"문제 등록하기"}
             onPress={() => router.push("/question/register")}
+            variant={"basic"}
           />
         </>
       ) : (
@@ -47,6 +48,7 @@ export default function BookPage({
           <BasicButton
             text={"문제 등록하기"}
             onPress={() => router.push("/question/register")}
+            variant={"basic"}
           />
         </div>
       )}

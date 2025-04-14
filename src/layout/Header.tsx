@@ -36,7 +36,6 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: center;
   padding: 10px 0;
-  border-bottom: 1px solid #ddd;
   position: relative;
   height: 48px;
 `

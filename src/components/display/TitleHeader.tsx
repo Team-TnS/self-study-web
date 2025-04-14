@@ -5,21 +5,22 @@ import {
   ActionButton,
   SubHeaderTitle,
   SubHeaderWrapper,
-} from "@/components/display/SubHeaderStyle"
+} from "@/components/display/TitleHeaderStyle"
 
 interface HeaderWithActionProps {
-  title: string
+  title?: string
   onClick: () => void
   icon: string
 }
 
-export default function SubHeader({
-  title,
+export default function TitleHeader({
+  title = "",
   onClick,
   icon,
 }: HeaderWithActionProps) {
   return (
     <SubHeaderWrapper>
+      <ActionButton></ActionButton>
       <SubHeaderTitle>{title}</SubHeaderTitle>
       <ActionButton onClick={onClick}>
         <Image src={icon} alt="Icon" width={32} height={32} />
