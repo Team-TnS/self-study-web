@@ -4,7 +4,7 @@ export interface GetBookcaseListResponse {
   totalElement: number
   page: number
   bookcaseList: {
-    bookCaseId: number
+    bookcaseId: string
     bookcaseName: string
   }[]
 }

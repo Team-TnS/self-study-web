@@ -1,11 +1,14 @@
 "use client"
 
 import styles from "./page.module.css"
-import { useEffect, use } from "react"
+import React, { useEffect, use } from "react"
 import BasicButton from "@/components/input/BasicButton"
 import BasicText from "@/components/display/BasicText"
 import { usePageHeader } from "@/layout/PageHeaderProvider"
 import { useRouter } from "next/navigation"
+import useBookcaseDetail from "@/hooks/book/useBookcaseDetail"
+import TitleHeader from "@/components/display/TitleHeader"
+import CardGrid from "@/components/display/CardGrid"
 
 export default function BookcasePage({
   params,
@@ -17,44 +20,42 @@ export default function BookcasePage({
   const { setTitle } = usePageHeader()
 
   useEffect(() => {
-    setTitle(Id)
+    setTitle("")
   }, [])
 
-  const books = [
-    { name: "1단원", progress: 12, count: 25 },
-    { name: "2단원", progress: 2, count: 20 },
-    { name: "3단원", progress: 6, count: 23 },
-  ]
+  const { name, books } = useBookcaseDetail(Id)
+
   return (
     <div className={styles.page}>
-      {!books ? (
+      <TitleHeader
+        title={name}
+        onClick={() => router.push("/book/register")}
+        icon="/plus.svg"
+      />
+      {books.length === 0 ? (
         <>
           <BasicText text={"공부할 수 있는 책이 없어요"} />
           <BasicButton
             text={"책 만들기"}
             onPress={() => router.push("/book/register")}
+            variant="basic"
           />
           <BasicButton
             text={"책 가져오기"}
             onPress={() => console.log("책 가져오기 링크~")}
+            variant={"primary"}
           />
         </>
       ) : (
         <div>
-          {Id}
-          {books.map((book) => (
-            <div
-              key={book.name}
-              className={styles.bookItem}
-              onClick={() => router.push("/book/1")}
-            >
-              <BasicText text={book.name} />
-              <BasicText text={`진행도: ${book.progress}/${book.count}`} />
-            </div>
-          ))}
-          <BasicButton
-            text={"책 만들기"}
-            onPress={() => router.push("/book/register")}
+          <TitleHeader
+            title={name}
+            onClick={() => router.push("/book/register")}
+            icon="/plus.svg"
+          />
+          <CardGrid
+            cardDtos={books}
+            handleOnClick={(id) => router.push(`/book/${id}`)}
           />
         </div>
       )}

@@ -12,6 +12,7 @@ export interface CardDto {
   name: string
   progress: number
   count: number
+  id: string
 }
 
 interface CardGridProps {

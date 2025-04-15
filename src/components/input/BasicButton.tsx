@@ -1,14 +1,19 @@
-import styles from "./BasicButton.module.css"
+import { Button } from "@/components/input/BasicButtonStyle"
 
 interface BasicButtonProps {
   text: string
   onPress: () => void
+  variant?: "basic" | "primary"
 }
 
-export default function BasicButton({ text, onPress }: BasicButtonProps) {
+export default function BasicButton({
+  text,
+  onPress,
+  variant,
+}: BasicButtonProps) {
   return (
-    <button className={styles.button} onClick={onPress}>
+    <Button onClick={onPress} variant={variant}>
       {text}
-    </button>
+    </Button>
   )
 }

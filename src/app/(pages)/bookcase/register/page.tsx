@@ -18,7 +18,11 @@ export default function BookcaseRegisterPage() {
   return (
     <div className={styles.page}>
       <InputField value={requestState.name} onChange={handleNameChange} />
-      <BasicButton text={"저장"} onPress={() => handleSubmit()} />
+      <BasicButton
+        text={"저장"}
+        onPress={() => handleSubmit()}
+        variant={"primary"}
+      />
     </div>
   )
 }

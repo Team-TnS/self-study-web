@@ -1,35 +1,39 @@
 "use client"
 
 import { useInfiniteQuery } from "@tanstack/react-query"
-import { getBookcaseList } from "@/api/bookcase/getBookcaseList"
 import { CardDto } from "@/components/display/CardGrid"
+import { getBookcaseDetail } from "@/api/bookcase/getBookcaseDetail"
 
-export default function useBookcaseList() {
+export default function useBookcaseDetail(bookcaseId: string) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["bookcaseList"],
+      queryKey: ["bookcaseDetail"],
       queryFn: ({ pageParam = 0 }) =>
-        getBookcaseList({ page: pageParam, size: 20 }),
+        getBookcaseDetail({ id: bookcaseId, page: pageParam, size: 20 }),
       initialPageParam: 0,
       getNextPageParam: (lastPage, pages) => {
         const totalCount = lastPage.totalElement
-        const loadedCount = pages.flatMap((p) => p.bookcaseList).length
+        const loadedCount = pages.flatMap((p) => p.bookList).length
         return loadedCount < totalCount ? pages.length : undefined
       },
     })
 
-  const bookcases: CardDto[] =
+  const firstPage = data?.pages[0]
+  const name = firstPage?.bookcaseName
+
+  const books: CardDto[] =
     data?.pages.flatMap((page) =>
-      page.bookcaseList.map((item) => ({
-        name: item.bookcaseName,
-        id: item.bookcaseId,
+      page.bookList.map((item) => ({
+        name: item.bookName,
         progress: 0,
         count: 0,
+        id: item.bookId,
       })),
     ) ?? []
 
   return {
-    bookcases,
+    name,
+    books,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
