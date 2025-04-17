@@ -13,23 +13,24 @@ import CardGrid from "@/components/display/CardGrid"
 export default function BookcasePage({
   params,
 }: {
-  params: Promise<{ Id: string }>
+  params: Promise<{ bookcaseId: string }>
 }) {
   const router = useRouter()
-  const { Id } = use(params)
+  const { bookcaseId } = use(params)
   const { setTitle } = usePageHeader()
+  console.log(bookcaseId)
 
   useEffect(() => {
     setTitle("")
   }, [])
 
-  const { name, books } = useBookcaseDetail(Id)
+  const { name, books } = useBookcaseDetail(bookcaseId)
 
   return (
     <div className={styles.page}>
       <TitleHeader
         title={name}
-        onClick={() => router.push("/book/register")}
+        onClick={() => router.push(`/bookcase/${bookcaseId}/book/register`)}
         icon="/plus.svg"
       />
       {books.length === 0 ? (
@@ -37,7 +38,7 @@ export default function BookcasePage({
           <BasicText text={"공부할 수 있는 책이 없어요"} />
           <BasicButton
             text={"책 만들기"}
-            onPress={() => router.push("/book/register")}
+            onPress={() => router.push(`/bookcase/${bookcaseId}/book/register`)}
             variant="basic"
           />
           <BasicButton
@@ -48,14 +49,11 @@ export default function BookcasePage({
         </>
       ) : (
         <div>
-          <TitleHeader
-            title={name}
-            onClick={() => router.push("/book/register")}
-            icon="/plus.svg"
-          />
           <CardGrid
             cardDtos={books}
-            handleOnClick={(id) => router.push(`/book/${id}`)}
+            handleOnClick={(books, bookId) =>
+              router.push(`/bookcase/${bookcaseId}/book/${bookId}`)
+            }
           />
         </div>
       )}

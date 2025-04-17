@@ -17,7 +17,7 @@ export interface CardDto {
 
 interface CardGridProps {
   cardDtos: CardDto[]
-  handleOnClick: (cardDto: CardDto, index: number) => void
+  handleOnClick: (cardDto: CardDto, index: string) => void
 }
 
 export default function CardGrid({ cardDtos, handleOnClick }: CardGridProps) {
@@ -30,7 +30,7 @@ export default function CardGrid({ cardDtos, handleOnClick }: CardGridProps) {
           <Card
             key={index}
             style={{ background: gradient }}
-            onClick={() => handleOnClick(cardDto, index)}
+            onClick={() => handleOnClick(cardDto, cardDto.id)}
           >
             <CardTitle>{cardDto.name}</CardTitle>
             <CardProgress>
