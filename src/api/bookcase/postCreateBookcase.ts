@@ -2,6 +2,7 @@ import { axiosInstance } from "@/api/axiosInstance"
 
 export interface PostCreateBookcaseRequestType {
   name: string
+  color: string
 }
 
 export const postCreateBookcase = async (

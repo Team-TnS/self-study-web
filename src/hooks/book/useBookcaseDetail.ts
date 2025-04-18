@@ -28,6 +28,7 @@ export default function useBookcaseDetail(bookcaseId: string) {
         progress: 0,
         count: 0,
         id: item.bookId,
+        color: item.bookColor,
       })),
     ) ?? []
 

@@ -6,6 +6,7 @@ export interface GetBookcaseListResponse {
   bookcaseList: {
     bookcaseId: string
     bookcaseName: string
+    bookcaseColor: string
   }[]
 }
 

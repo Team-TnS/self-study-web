@@ -18,7 +18,6 @@ export default function BookcasePage({
   const router = useRouter()
   const { bookcaseId } = use(params)
   const { setTitle } = usePageHeader()
-  console.log(bookcaseId)
 
   useEffect(() => {
     setTitle("")

@@ -4,17 +4,21 @@
 import Header from "@/layout/Header"
 import Footer from "@/layout/Footer"
 import { usePageHeader } from "@/layout/PageHeaderProvider"
-
+import { usePathname } from "next/navigation"
 export default function ClientLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const noBackButtonPages = ["/"]
   const { title } = usePageHeader()
-
+  const pathname = usePathname()
   return (
     <div className="layout">
-      <Header title={title} showBackButton />
+      <Header
+        title={title}
+        showBackButton={!noBackButtonPages.includes(pathname)}
+      />
       <main>{children}</main>
       <Footer />
     </div>

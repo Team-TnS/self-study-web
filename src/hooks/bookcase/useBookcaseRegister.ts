@@ -9,7 +9,7 @@ import {
 
 export default function useBookcaseRegister(onSuccessCallback?: () => void) {
   const [requestState, setRequestState] =
-    useState<PostCreateBookcaseRequestType>({ name: "" })
+    useState<PostCreateBookcaseRequestType>({ name: "", color: "" })
 
   const { mutate } = useMutation({
     mutationFn: () => postCreateBookcase(requestState),
@@ -25,9 +25,17 @@ export default function useBookcaseRegister(onSuccessCallback?: () => void) {
     }))
   }
 
+  const handleColorSelect = (value: string) => {
+    setRequestState((prev) => ({
+      ...prev,
+      color: value,
+    }))
+  }
+
   return {
     requestState,
     handleNameChange,
+    handleColorSelect,
     handleSubmit: mutate,
   }
 }
