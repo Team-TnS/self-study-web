@@ -10,14 +10,14 @@ import { useRouter } from "next/navigation"
 export default function BookPage({
   params,
 }: {
-  params: Promise<{ Id: string }>
+  params: Promise<{ bookcaseId: string; bookId: string }>
 }) {
   const router = useRouter()
-  const { Id } = use(params)
+  const { bookcaseId, bookId } = use(params)
   const { setTitle } = usePageHeader()
 
   useEffect(() => {
-    setTitle(Id)
+    setTitle(bookcaseId)
   }, [])
 
   const questions = [
@@ -27,18 +27,22 @@ export default function BookPage({
   ]
   return (
     <div className={styles.page}>
-      {!questions ? (
+      {questions.length === 0 ? (
         <>
           <BasicText text={"등록된 문제가 없습니다."} />
           <BasicButton
             text={"문제 등록하기"}
-            onPress={() => router.push("/question/register")}
+            onPress={() =>
+              router.push(
+                `/bookcase/${bookcaseId}/book/${bookId}/question/register`,
+              )
+            }
             variant={"basic"}
           />
         </>
       ) : (
         <div>
-          {Id}
+          {bookId}
           {questions.map((question) => (
             <div key={question.name} className={styles.questionItem}>
               <BasicText text={question.name} />
@@ -47,7 +51,11 @@ export default function BookPage({
           ))}
           <BasicButton
             text={"문제 등록하기"}
-            onPress={() => router.push("/question/register")}
+            onPress={() =>
+              router.push(
+                `/bookcase/${bookcaseId}/book/${bookId}/question/register`,
+              )
+            }
             variant={"basic"}
           />
         </div>
