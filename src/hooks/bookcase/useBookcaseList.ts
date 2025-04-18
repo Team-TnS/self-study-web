@@ -25,7 +25,7 @@ export default function useBookcaseList() {
         id: item.bookcaseId,
         progress: 0,
         count: 0,
-        color: "#5569e6",
+        color: item.bookcaseColor,
       })),
     ) ?? []
 

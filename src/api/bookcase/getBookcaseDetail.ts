@@ -8,6 +8,7 @@ export interface GetBookcaseDetailResponse {
     bookcaseId: number
     bookId: string
     bookName: string
+    bookColor: string
   }[]
 }
 

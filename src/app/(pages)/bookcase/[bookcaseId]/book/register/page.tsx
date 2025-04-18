@@ -9,6 +9,7 @@ import VerticalContainer from "@/layout/VerticalContainer"
 import InputContainer from "@/layout/InputContainer"
 import TitleHeader from "@/components/display/TitleHeader"
 import useBookcaseDetail from "@/hooks/book/useBookcaseDetail"
+import ColorPicker from "@/components/input/ColorPicker"
 
 export default function BookRegisterPage({
   params,
@@ -17,8 +18,9 @@ export default function BookRegisterPage({
 }) {
   const { setTitle } = usePageHeader()
   const { bookcaseId } = use(params)
-  const { requestState, handleNameChange, handleSubmit } = useBookRegister()
-
+  const { requestState, handleNameChange, handleColorSelect, handleSubmit } =
+    useBookRegister()
+  requestState.bookcaseId = bookcaseId
   const { name } = useBookcaseDetail(bookcaseId)
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export default function BookRegisterPage({
           onChange={handleNameChange}
           placeholder={"책 이름을 입력해주세요."}
         />
+        <ColorPicker value={requestState.color} onSelect={handleColorSelect} />
       </InputContainer>
 
       <BasicButton

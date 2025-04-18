@@ -10,6 +10,7 @@ import {
 export default function useBookRegister(onSuccessCallback?: () => void) {
   const [requestState, setRequestState] = useState<PostCreateBookRequestType>({
     name: "",
+    color: "",
     bookcaseId: "",
   })
 
@@ -27,9 +28,17 @@ export default function useBookRegister(onSuccessCallback?: () => void) {
     }))
   }
 
+  const handleColorSelect = (value: string) => {
+    setRequestState((prev) => ({
+      ...prev,
+      color: value,
+    }))
+  }
+
   return {
     requestState,
     handleNameChange,
+    handleColorSelect,
     handleSubmit: mutate,
   }
 }
