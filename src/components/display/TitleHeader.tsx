@@ -9,8 +9,8 @@ import {
 
 interface HeaderWithActionProps {
   title?: string
-  onClick: () => void
-  icon: string
+  onClick?: () => void
+  icon?: string
 }
 
 export default function TitleHeader({
@@ -23,7 +23,7 @@ export default function TitleHeader({
       <ActionButton></ActionButton>
       <SubHeaderTitle>{title}</SubHeaderTitle>
       <ActionButton onClick={onClick}>
-        <Image src={icon} alt="Icon" width={32} height={32} />
+        {icon ? <Image src={icon} alt="Icon" width={32} height={32} /> : <></>}
       </ActionButton>
     </SubHeaderWrapper>
   )

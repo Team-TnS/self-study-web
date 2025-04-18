@@ -10,7 +10,7 @@ export const InputWrapper = styled.div<{ visible?: boolean }>`
 
 export const StyledInput = styled.input`
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #797979;
   padding: 0.5rem 0;
   font-size: 1rem;
   outline: none;

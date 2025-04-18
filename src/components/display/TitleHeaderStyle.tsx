@@ -4,7 +4,6 @@ export const SubHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 61px;
 `
 
 export const SubHeaderTitle = styled.h2`

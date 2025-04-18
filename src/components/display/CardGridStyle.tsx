@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { getGradientColors } from "@/utils/colorUtils"
 
 export const CardGridWrapper = styled.div`
   display: grid;
@@ -6,7 +7,7 @@ export const CardGridWrapper = styled.div`
   gap: 13px;
 `
 
-export const Card = styled.div`
+export const Card = styled.div<{ color: string }>`
   border-radius: 9px;
   padding: 16px;
   color: white;
@@ -18,7 +19,11 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 120px;
-
+  background: linear-gradient(
+    135deg,
+    ${(props) => props.color} 0%,
+    ${(props) => getGradientColors(props.color)[1]} 100%
+  );
   &:hover {
     transform: scale(1.03);
   }
